@@ -21,6 +21,7 @@ fullscreen.add = function(target) {
 
 // Current target that the mouse is hovered over
 fullscreen.active_target = null;
+fullscreen.style_before = null;
 
 fullscreen.handler = function(e) {
     /** Handler for keyboard events */
@@ -54,8 +55,16 @@ fullscreen.toggle = function(target) {
     /** Switch between fullscreen and normal modes */
     if (target.classList.contains("fullscreen")) {
         target.classList.remove("fullscreen");
+        target.style = fullscreen.style_before;
     } else {
         target.classList.add("fullscreen");
+        target.style.width = "100vw";
+        target.style.height = "100vh";
+        target.style.display = "block";
+        target.style.position = "fixed";
+        target.style.zIndex = 998;
+        target.style.top = 0;
+        target.style.left = 0;
     }
 }
 
