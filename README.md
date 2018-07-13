@@ -1,34 +1,12 @@
-# header.js
+# vince.js 
+
+A collection of JS scripts powering http://www.vincela.com.
+
+## header.js
 header.js is a CSS/JavaScript package which adds a fixed navbar to the top of a webpage. A shadow around the navbar is generated when visitor of your web page scrolls down, and recedes when the user scrolls all the way back up.
 
-## Examples
-http://www.vincela.com/projects/ is an example of a webpage using *header.js*
+## fullscreen.js
+Adds a keyboard shortcut (Control + F11) to any HTML element to make it go fullscreen, along with a helpful tooltip.
 
-## Usage
-To use header.js on your web site, simply download:
-* header.css
-* header.js
-
-And include them in the <head> of your webpage like:
-```
-<link href="header.css" rel="stylesheet" type="text/css">
-<script src="header.js" type="text/javascript"></script>
-```
-
-Then, for the element that you want to use as a navbar, give it the id="navbar-top" attribute, e.g.:
-```
-<nav id="navbar-top">
-    <a href="">Home</a>
-    <a href="">About</a>
-    <a href="">Contact</a>
-    <a href="">Blog</a>
-    <a href="">Portfolio</a>
-</nav>
-```
-
-The test.html file provides an example of how to implement header.js.
-
-## Modification
-The included CSS file applies a default styling to the navbar which you might want to modify or remove. Furthermore, in the CSS you can change the color, size, and other attributes of the shadow.
-
-For more advanced users, the original SASS (.scss) files are also included in this repository.
+## preview.js
+Adds a live preview for the ACE editor when in HTML mode.
