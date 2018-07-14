@@ -8,6 +8,12 @@
 }
 
 .editor-wrapper.fullscreen {
+    /** Editor in fullscreen mode */
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    width: 100vw;
     height: 100vh;
     
     .editor-options {
@@ -33,6 +39,7 @@
         iframe {
             @extend %fill-up-parent;
             border: none;
+            background: #ffffff;
         }
     }
 }
