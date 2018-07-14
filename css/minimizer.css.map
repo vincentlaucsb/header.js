@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW,CACP,OAAO,CAAE,IAAI",
+"sources": ["../css-raw/minimizer.scss"],
+"names": [],
+"file": "minimizer.css"
+}

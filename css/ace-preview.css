@@ -1,0 +1,2 @@
+.editor-preview,.editor-preview .preview iframe{width:100%;height:100%}.editor-wrapper{height:80vh}.editor-wrapper.fullscreen{height:100vh}.editor-wrapper.fullscreen .editor-options{position:fixed;bottom:0}.editor-preview{display:flex;flex-direction:row}.editor-preview .editor{flex-grow:1;min-width:50%;height:100%}.editor-preview .preview{flex-grow:1}.editor-preview .preview iframe{border:none}.editor-options{width:100%}.editor-options nav{float:right}
+/*# sourceMappingURL=ace-preview.css.map */
