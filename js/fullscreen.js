@@ -1,71 +1,60 @@
-var fullscreen = {}
+// Ref: https://github.com/robnyman/robnyman.github.com/blob/master/fullscreen/js/base.js
+
+function Fullscreen(
+    trigger,
+    target,
+    fullscreen_callback = null,
+    exit_callback = null
+    ) {
+        this.trigger = trigger;
+        this.target = target;
+        this.fullscreen_callback = fullscreen_callback;
+        this.exit_callback = exit_callback;
+        this.is_fullscreen = function() {
+            // This is bullshit
+            return document.fullscreenElement || document.mozFullScreenElement || document.msFullscreenElement || document.webkitFullscreenElement;
+        }
         
-fullscreen.add = function(target) {
-    /** Register an element with the fullscreen controller */
-    target.addEventListener("mouseover", function() {
-        if (fullscreen.active_target != target) {
-            fullscreen.active_target = target;
+        // Add appropriate fullscreen handler       
+        const fs_change_handler = function(event) {
+            // console.log(event);
+            if (is_fullscreen()) {
+                fullscreen_callback();
+            } else {
+                exit_callback();
+            }
+        };
+        
+        if (document.onmozfullscreenchange === null) {
+            document.onmozfullscreenchange = fs_change_handler;
+        } else if (document.onwebkitfullscreenchange === null) {
+            document.onmozfullscreenchange = fs_change_handler;            
+        } else if (document.MSFullscreenChange === null) {
+            document.MSFullscreenChange = fs_change_handler;            
         }
-
-        fullscreen.toggle_popup();
-    });
-    
-    target.addEventListener("mouseout", function() {
-        if (fullscreen.active_target == target) {
-            fullscreen.active_target = null;
-        }
-
-        fullscreen.toggle_popup();
-    });
-}
-
-// Current target that the mouse is hovered over
-fullscreen.active_target = null;
-fullscreen.style_before = null;
-
-fullscreen.handler = function(e) {
-    /** Handler for keyboard events */
-    if (e.key == 'F11' && e.ctrlKey) {
-        fullscreen.toggle(fullscreen.active_target);
-    } 
-}
-
-fullscreen.toggle_popup = function() {
-    /** Show a tooltip giving the user a hint */
-    const popup = document.getElementById("fullscreen-popup");
-    const target = fullscreen.active_target;
-
-    var message = "";
-    if (target && !target.classList.contains("fullscreen")) {
-        message = "Press Ctrl + F11 to go fullscreen";
-    } else {
-        message = "Press Ctrl + F11 to minimize";
+        
+        trigger.addEventListener("click", function(event) {
+            /** Switch between fullscreen and normal modes */
+            if (is_fullscreen()) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullscreen();
+                }
+            }
+            
+            if (target.requestFullscreen) {
+                target.requestFullscreen();
+            } else if (target.msRequestFullscreen) {
+                target.requestFullscreen();                
+            } else if (target.mozRequestFullScreen) {
+                target.mozRequestFullScreen();
+            } else if (target.webkitRequestFullScreen) {
+                target.webkitRequestFullScreen();
+            }
+        });
     }
-
-    if (popup.classList.contains("invisible")) {
-        popup.classList.remove("invisible");
-    } else {
-        popup.classList.add("invisible");
-    }
-
-    popup.innerHTML = message;
-}
-
-fullscreen.toggle = function(target) {
-    /** Switch between fullscreen and normal modes */
-    if (target.classList.contains("fullscreen")) {
-        target.classList.remove("fullscreen");
-        target.style = fullscreen.style_before;
-    } else {
-        target.classList.add("fullscreen");
-        target.style.width = "100vw";
-        target.style.height = "100vh";
-        target.style.display = "block";
-        target.style.position = "fixed";
-        target.style.zIndex = 998;
-        target.style.top = 0;
-        target.style.left = 0;
-    }
-}
-
-document.getElementsByTagName("body")[0].onkeyup = fullscreen.handler;

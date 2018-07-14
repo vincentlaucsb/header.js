@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "AAAA,UAAW,CACP,OAAO,CAAE,IAAI",
-"sources": ["../css-raw/minimizer.scss"],
+"mappings": "AAAA,UAAW,CACP,OAAO,CAAE,IAAI,CAGjB,mBAAoB,CAChB,QAAQ,CAAE,KAAK,CACf,GAAG,CAAE,CAAC",
+"sources": ["../sass/minimizer.scss"],
 "names": [],
 "file": "minimizer.css"
 }

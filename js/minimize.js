@@ -32,11 +32,3 @@ function Minimizer(
     ) {
         return new ClassChanger("minimized", trigger, target, minimize_text, restore_text);
     }
-    
-function Fullscreen(
-    trigger,
-    target,
-    minimize_text = "Go Fullscreen",
-    restore_text = "Go Back") {
-        return new ClassChanger("fullscreen", trigger, target, minimize_text, restore_text);
-    }
