@@ -1,0 +1,2 @@
+nav.tab-menu{display:flex;background:rgba(0,0,0,0.85);color:rgba(255,255,255,0.85)}nav.tab-menu *{display:inline-block}nav.tab-menu a{padding:0.5em 1em 0.5em 1em}nav.tab-menu a.active{background:rgba(0,0,0,0.7)}nav.tab-menu a:hover{background:rgba(0,0,0,0.7);cursor:pointer}
+/*# sourceMappingURL=tabs.css.map */

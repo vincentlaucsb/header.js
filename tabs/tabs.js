@@ -1,8 +1,7 @@
 class Tabber {
     constructor(name) {
         this.target = document.getElementById(name);
-        this.nav_bar = document.querySelector("nav#" + name + "-menu");
-        this.sections = this.target.getElementsByTagName("section");
+        this.nav_bar = document.querySelector("nav#" + name + "-menu");      
         this.active_section = null;
         
         if (!this.target) {
@@ -11,9 +10,26 @@ class Tabber {
         
         if (!this.nav_bar) {
             throw "Couldn't find a <nav id='" + name + "-menu'> element to populate with tabs";
+        } else {
+            // Add class="tab-menu" to <nav>
+            this.nav_bar.classList.add("tab-menu");
         }
         
         this.process_sections();
+    }
+    
+    get sections() {
+        var temp = [];
+        for (var i = 0; i < this.target.childNodes.length; i++) {
+            const node = this.target.childNodes[i];
+            if (node.tagName == "SECTION") {
+                // Add class="tab" to <section>
+                node.classList.add("tab");
+                temp.push(node);
+            }
+        }        
+        
+        return temp;
     }
     
     get links() {
@@ -53,11 +69,6 @@ class Tabber {
                 Tabber.toggle(this, i);
             }
         }
-        
-        // Used for border effect
-        var last_elem = document.createElement("div");
-        last_elem.setAttribute("class", "last");
-        this.nav_bar.appendChild(last_elem);
     }
     
     static click_handler(tabber, event) {

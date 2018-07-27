@@ -1,0 +1,24 @@
+$active-bg-color: rgba(0, 0, 0, 0.7);
+
+nav.tab-menu {
+    display: flex;
+    background: rgba(0, 0, 0, 0.85);
+    color: rgba(255, 255, 255, 0.85);
+    
+    * {
+        display: inline-block;
+    }
+    
+    a {
+        padding: 0.5em 1em 0.5em 1em;
+    }
+    
+    a.active {
+        background: $active-bg-color;
+    }
+
+    a:hover {
+        background: $active-bg-color;
+        cursor: pointer;
+    }
+}

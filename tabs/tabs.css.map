@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,YAAa,CACT,OAAO,CAAE,IAAI,CACb,UAAU,CAAE,gBAAmB,CAC/B,KAAK,CAAE,sBAAyB,CAEhC,cAAE,CACE,OAAO,CAAE,YAAY,CAGzB,cAAE,CACE,OAAO,CAAE,mBAAmB,CAGhC,qBAAS,CACL,UAAU,CAhBA,eAAkB,CAmBhC,oBAAQ,CACJ,UAAU,CApBA,eAAkB,CAqB5B,MAAM,CAAE,OAAO",
+"sources": ["tabs.scss"],
+"names": [],
+"file": "tabs.css"
+}

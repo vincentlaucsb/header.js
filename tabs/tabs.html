@@ -4,50 +4,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ACE Editor Auto-Preview</title>
-    <script src="ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script> 
+    <title>Tabs Example</title>
     <script src="tabs.js" type="text/javascript"></script>
+    <link href="tabs.css" rel="stylesheet" />
     <style type="text/css">
         body {
             font-family: sans-serif;
-            width: 80vw;
-            margin-left: 10vw;
-            margin-right: 10vw;
-            margin-top: 5vw;
-        }
-    
-        nav {
-            display: flex;
-        }
-    
-        nav * {
-            display: inline-block;
-        }
-    
-        nav a {
-            border-width: 1px;
-            border-style: solid;
-            border-color: black;
-            padding: 0.25em 0.5em 0.25em 0.5em;
-        }
-        
-        nav a.active {
-            border-bottom: 0;
-        }
-        
-        nav a:hover {
-            cursor: pointer;
-        }
-        
-        nav div.last {
-            border-bottom: 1px solid black;
-            flex-grow: 2;
+            margin: 0;
         }
         
         #tabs {
-            border-width: 0 1px 1px 1px;
-            border-style: solid;
-            border-color: black;
             padding: 0.25em 0.5em 0.25em 0.5em;
         }
     </style>
