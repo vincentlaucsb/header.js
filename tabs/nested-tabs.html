@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- ACE Editor with auto-updating preview -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tabs Example</title>
+    <script src="tabs.js" type="text/javascript"></script>
+    <link href="tabs.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+        
+        #tabs {
+            padding: 0.25em 0.5em 0.25em 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="tabs-menu"></nav>
+    <div id="tabs">
+        <section data-title="Tab 1">
+            <nav id="inner-tabs-menu"></nav>
+            <div id="inner-tabs">
+                <section data-title="A">
+                    <p>Content for Tab 1A</p>
+                </section>
+                <section data-title="B">
+                    <p>Content for Tab 1B</p>
+                </section>
+                <section data-title="C">
+                    <p>Content for Tab 1C</p>
+                </section>
+            </div>
+        </section>
+        <section data-title="Tab 2">
+            <p>Content for Tab 2</p>
+        </section>
+        <section data-title="Tab 3">
+            <p>Content for Tab 3</p>
+        </section>
+    </div>
+    
+    <script type="text/javascript">
+        var tabs = new Tabber("tabs");
+        var inner_tabs = new Tabber("inner-tabs");
+    </script>
+</body>
+
+</html>

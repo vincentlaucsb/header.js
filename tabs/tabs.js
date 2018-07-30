@@ -1,18 +1,34 @@
+const TABBER_DEFAULT_CLASS_NAMES = {
+    tabClass: 'tab',
+    navBarClass: 'tab-menu'
+};
+
+/**
+ * Represents a set of tabs.
+ * @constructor
+ * @param {string} name - The id of the element containing tabs
+ * @param {object} classNames - A mapping describing the CSS classes that should be attached
+ *                              to tabs and links
+ */
 class Tabber {
-    constructor(name) {
+    constructor(
+        name,
+        classNames = TABBER_DEFAULT_CLASS_NAMES
+    ) {
         this.target = document.getElementById(name);
-        this.nav_bar = document.querySelector("nav#" + name + "-menu");      
+        this.classNames = classNames;
+        this.nav_bar = document.querySelector("nav#" + name + "-menu");
         this.active_section = null;
         
         if (!this.target) {
-            throw "Couldn't find an element with id " + name;            
+            throw "Couldn't find an element with id " + name;  
         }
         
         if (!this.nav_bar) {
             throw "Couldn't find a <nav id='" + name + "-menu'> element to populate with tabs";
         } else {
             // Add class="tab-menu" to <nav>
-            this.nav_bar.classList.add("tab-menu");
+            this.nav_bar.classList.add(classNames.navBarClass);
         }
         
         this.process_sections();
@@ -24,7 +40,7 @@ class Tabber {
             const node = this.target.childNodes[i];
             if (node.tagName == "SECTION") {
                 // Add class="tab" to <section>
-                node.classList.add("tab");
+                node.classList.add(this.classNames.tabClass);
                 temp.push(node);
             }
         }        
