@@ -1,6 +1,9 @@
 # Cache
 .sass-cache/
 
+# Node
+node_modules/
+
 # pytest/Selenium
 .cache/
 *.log
