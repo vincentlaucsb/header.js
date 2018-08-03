@@ -42,6 +42,17 @@ var Filter = function (_React$Component) {
             this.setState({ active: _active });
         }
     }, {
+        key: "toggleAll",
+        value: function toggleAll(show) {
+            var _active = this.active;
+            for (var key in this.active) {
+                _active[key] = show;
+            }
+
+            console.log(this);
+            this.setState({ active: _active });
+        }
+    }, {
         key: "render",
         value: function render() {
             var _this2 = this;
@@ -55,12 +66,36 @@ var Filter = function (_React$Component) {
                 }
             }
 
+            var that = this;
+
             return React.createElement(
                 "div",
                 { className: "filter" },
-                React.createElement(TagList, { tags: this.tags, onClick: function onClick(i) {
+                React.createElement(TagList, {
+                    tags: this.tags,
+                    activeTags: active_tags,
+                    onClick: function onClick(i) {
                         return _this2.handleClick(i);
-                    } }),
+                    }
+                }),
+                React.createElement(
+                    "nav",
+                    { className: "toggle-all" },
+                    React.createElement(
+                        "button",
+                        { onClick: function onClick(i) {
+                                return _this2.toggleAll(false);
+                            } },
+                        "hide all"
+                    ),
+                    React.createElement(
+                        "button",
+                        { onClick: function onClick(i) {
+                                return _this2.toggleAll(true);
+                            } },
+                        "show all"
+                    )
+                ),
                 React.createElement(ItemSet, { items: this.props.items, activeTags: active_tags })
             );
         }
@@ -74,7 +109,7 @@ function TagList(props) {
         "nav",
         null,
         props.tags.map(function (i) {
-            return React.createElement(Tag, { key: i, name: i, onClick: function onClick() {
+            return React.createElement(Tag, { key: i, name: i, activeTags: props.activeTags, onClick: function onClick() {
                     return props.onClick(i);
                 } });
         })
@@ -82,9 +117,15 @@ function TagList(props) {
 }
 
 function Tag(props) {
+    var is_active = props.activeTags.has(props.name);
+    var class_name = "tag inactive";
+    if (is_active) {
+        class_name = "tag";
+    }
+
     return React.createElement(
         "button",
-        { className: "tag", onClick: props.onClick },
+        { className: class_name, onClick: props.onClick },
         props.name
     );
 }
@@ -99,6 +140,7 @@ function ItemSet(props) {
                 title: i.title,
                 description: i.description,
                 tags: i.tags,
+                links: i.links,
                 activeTags: props.activeTags
             });
         })
@@ -125,11 +167,18 @@ var Item = function (_React$Component2) {
             }
 
             var divStyle = {
-                display: 'none'
+                display: "none"
             };
 
             if (is_visible) {
-                divStyle.display = "block";
+                divStyle.display = "";
+            }
+
+            /** If undefined */
+            if (this.props.links) {
+                var links = this.props.links;
+            } else {
+                var links = [];
             }
 
             return React.createElement(
@@ -142,8 +191,30 @@ var Item = function (_React$Component2) {
                 ),
                 React.createElement(
                     "p",
-                    null,
+                    { className: "tags" },
+                    this.props.tags.map(function (i) {
+                        return React.createElement(
+                            "span",
+                            null,
+                            i
+                        );
+                    })
+                ),
+                React.createElement(
+                    "p",
+                    { className: "description" },
                     this.props.description
+                ),
+                React.createElement(
+                    "nav",
+                    null,
+                    links.map(function (i) {
+                        return React.createElement(
+                            "a",
+                            { href: i.url },
+                            i.name
+                        );
+                    })
                 )
             );
         }

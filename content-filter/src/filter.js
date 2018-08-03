@@ -27,6 +27,16 @@ class Filter extends React.Component {
         this.setState({active: _active});
     }
     
+    toggleAll(show) {
+        var _active = this.active;
+        for (var key in this.active) {
+            _active[key] = show;
+        }
+        
+        console.log(this);
+        this.setState({active: _active});
+    }
+    
     render() {
         var active_tags = new Set();
         var cand_tags = Object.keys(this.active);
@@ -37,9 +47,19 @@ class Filter extends React.Component {
             }
         }
         
+        var that = this;
+        
         return (
             <div className="filter">
-                <TagList tags={this.tags} onClick={i => this.handleClick(i)} />
+                <TagList
+                    tags={this.tags}
+                    activeTags={active_tags}
+                    onClick={i => this.handleClick(i)}
+                />
+                <nav className="toggle-all">
+                    <button onClick={i => this.toggleAll(false)}>hide all</button>
+                    <button onClick={i => this.toggleAll(true)}>show all</button>
+                </nav>
                 <ItemSet items={this.props.items} activeTags={active_tags} />
             </div>
         );
@@ -49,16 +69,22 @@ class Filter extends React.Component {
 function TagList(props) {
     return (
         <nav>
-        {props.tags.map((i) =>
-            <Tag key={i} name={i} onClick={() => props.onClick(i)} />
-        )}
+            {props.tags.map((i) =>
+                <Tag key={i} name={i} activeTags={props.activeTags} onClick={() => props.onClick(i)} />
+            )}
         </nav>
     );
 }
 
 function Tag(props) {
+    const is_active = props.activeTags.has(props.name);
+    var class_name = "tag inactive";
+    if (is_active) {
+        class_name = "tag";
+    }
+        
     return (
-        <button className="tag" onClick={props.onClick}>
+        <button className={class_name} onClick={props.onClick}>
             {props.name}
         </button>
     );
@@ -72,6 +98,7 @@ function ItemSet(props) {
             title={i.title}
             description={i.description}
             tags={i.tags}
+            links={i.links}
             activeTags={props.activeTags}
         />)}
         </div>
@@ -92,17 +119,32 @@ class Item extends React.Component {
         }
         
         var divStyle = {
-            display: 'none'
+            display: "none"
         };
         
         if (is_visible) {
-            divStyle.display = "block";
+            divStyle.display = "";
+        }
+        
+        /** If undefined */
+        if (this.props.links) {
+            var links = this.props.links;
+        } else {
+            var links = [];
         }
         
         return (
             <div style={divStyle} className="item">
                 <h3>{this.props.title}</h3>
-                <p>{this.props.description}</p>
+                <p className="tags">
+                    {this.props.tags.map((i) => <span>{i}</span>)}
+                </p>
+                <p className="description">
+                    {this.props.description}
+                </p>
+                <nav>
+                    {links.map((i) => <a href={i.url}>{i.name}</a>)}
+                </nav>
             </div>
         );
     }
