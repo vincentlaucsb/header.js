@@ -141,6 +141,7 @@ function ItemSet(props) {
                 description: i.description,
                 tags: i.tags,
                 links: i.links,
+                image: i.image,
                 activeTags: props.activeTags
             });
         })
@@ -157,6 +158,15 @@ var Item = function (_React$Component2) {
     }
 
     _createClass(Item, [{
+        key: "renderImage",
+        value: function renderImage() {
+            if (this.props.image) {
+                return React.createElement("img", { src: this.props.image, alt: "{this.props.title}" });
+            } else {
+                return null;
+            }
+        }
+    }, {
         key: "render",
         value: function render() {
             var is_visible = false;
@@ -174,16 +184,23 @@ var Item = function (_React$Component2) {
                 divStyle.display = "";
             }
 
-            /** If undefined */
+            /** If links are defined */
             if (this.props.links) {
                 var links = this.props.links;
             } else {
                 var links = [];
             }
 
+            /** If there's an image */
+            var image = this.renderImage();
+            if (image) {
+                divStyle.width = "100%";
+            }
+
             return React.createElement(
                 "div",
                 { style: divStyle, className: "item" },
+                image,
                 React.createElement(
                     "h3",
                     null,
@@ -195,7 +212,7 @@ var Item = function (_React$Component2) {
                     this.props.tags.map(function (i) {
                         return React.createElement(
                             "span",
-                            null,
+                            { key: i },
                             i
                         );
                     })
@@ -211,7 +228,7 @@ var Item = function (_React$Component2) {
                     links.map(function (i) {
                         return React.createElement(
                             "a",
-                            { href: i.url },
+                            { key: i.name, href: i.url },
                             i.name
                         );
                     })

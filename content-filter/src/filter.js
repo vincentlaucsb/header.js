@@ -99,6 +99,7 @@ function ItemSet(props) {
             description={i.description}
             tags={i.tags}
             links={i.links}
+            image={i.image}
             activeTags={props.activeTags}
         />)}
         </div>
@@ -108,6 +109,14 @@ function ItemSet(props) {
 class Item extends React.Component {
     constructor(props) {
         super(props);
+    }
+    
+    renderImage() {
+        if (this.props.image) {
+            return <img src={this.props.image} alt="{this.props.title}"/>;
+        } else {
+            return null;
+        }
     }
     
     render() {
@@ -126,24 +135,31 @@ class Item extends React.Component {
             divStyle.display = "";
         }
         
-        /** If undefined */
+        /** If links are defined */
         if (this.props.links) {
             var links = this.props.links;
         } else {
             var links = [];
         }
         
+        /** If there's an image */
+        var image = this.renderImage();
+        if (image) {
+            divStyle.width = "100%";
+        }
+        
         return (
             <div style={divStyle} className="item">
+                {image}
                 <h3>{this.props.title}</h3>
                 <p className="tags">
-                    {this.props.tags.map((i) => <span>{i}</span>)}
+                    {this.props.tags.map((i) => <span key={i}>{i}</span>)}
                 </p>
                 <p className="description">
                     {this.props.description}
                 </p>
                 <nav>
-                    {links.map((i) => <a href={i.url}>{i.name}</a>)}
+                    {links.map((i) => <a key={i.name} href={i.url}>{i.name}</a>)}
                 </nav>
             </div>
         );
